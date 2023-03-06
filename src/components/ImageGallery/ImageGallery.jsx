@@ -1,10 +1,11 @@
 import { Component } from 'react';
 import toast from 'react-hot-toast';
 import { ColorRing } from 'react-loader-spinner';
+import css from './ImageGallery.module.css';
+import PropTypes from 'prop-types';
 import { ImageGalleryItem } from 'components/ImageGalleryItem/ImageGalleryItem';
 import { getImages } from 'services/getImages';
 import { Button } from 'components/Button/Button';
-// import { Modal } from 'components/Modal/Modal';
 
 export class ImageGallery extends Component {
   state = {
@@ -24,7 +25,7 @@ export class ImageGallery extends Component {
       getImages(this.props.value, this.state.page, this.state.imgPerPage)
         .then(response => response.json())
         .then(data => {
-          // console.log(data);
+          console.log(data);
           // console.log(data.hits);
           // console.log(this.state.imgPerPage);
           if (data.totalHits === 0) {
@@ -75,7 +76,7 @@ export class ImageGallery extends Component {
           />
         )}
         <>
-          <ul className="gallery">
+          <ul className={css.ImageGallery}>
             {this.state.images.length !== 0 &&
               this.state.images.map(img => {
                 return (
@@ -90,9 +91,10 @@ export class ImageGallery extends Component {
           {this.state.images.length !== 0 && (
             <Button onClick={this.handleLoad} />
           )}
-          {/* {this.state.selectedImg && <Modal />} */}
         </>
       </>
     );
   }
 }
+
+ImageGallery.propTypes = {};

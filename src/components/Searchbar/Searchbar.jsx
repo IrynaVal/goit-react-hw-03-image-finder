@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import toast from 'react-hot-toast';
-// import css from './ContactForm.module.css';
+import { GoSearch } from 'react-icons/go';
+import css from './Searchbar.module.css';
 import PropTypes from 'prop-types';
 
 export class Searchbar extends Component {
@@ -16,14 +17,15 @@ export class Searchbar extends Component {
   };
 
   handleFormSubmit = evt => {
+    const { query } = this.state;
     evt.preventDefault();
-    if (!this.state.query) {
+    if (!query) {
       toast.error(
         'Sorry, there are no images matching your search query. Please try again.'
       );
       return;
     }
-    this.props.onSearch(this.state.query);
+    this.props.onSubmit(query);
     this.resetForm();
   };
 
@@ -34,14 +36,17 @@ export class Searchbar extends Component {
   render() {
     const { query } = this.state;
     return (
-      <header className="searchbar">
-        <form className="form" onSubmit={this.handleFormSubmit}>
-          <button type="submit" className="button">
-            <span className="button-label">Search</span>
+      <header className={css.Searchbar}>
+        <form className={css.SearchForm} onSubmit={this.handleFormSubmit}>
+          <button type="submit" className={css.SearchForm_button}>
+            <span className={css.SearchForm_button_label}>
+              Search
+              {/* <GoSearch /> */}
+            </span>
           </button>
 
           <input
-            className="input"
+            className={css.SearchForm_input}
             type="text"
             autoComplete="off"
             autoFocus
@@ -57,5 +62,5 @@ export class Searchbar extends Component {
 }
 
 Searchbar.propTypes = {
-  onSearch: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
 };

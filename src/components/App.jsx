@@ -2,6 +2,7 @@ import { Component } from 'react';
 import { Toaster } from 'react-hot-toast';
 import { Searchbar } from './Searchbar/Searchbar';
 import { ImageGallery } from './ImageGallery/ImageGallery';
+
 // import { Button } from 'components/Button/Button';
 // import { getImages } from 'services/getImages';
 
@@ -41,6 +42,7 @@ export class App extends Component {
 
   formSubmitHandler = searchQuery => {
     this.setState({ searchQuery });
+    // this.setState({ page: 1 });
     //   // const { name, number } = data;
     //   const { images } = this.state;
     //   // const repeatName = contacts.find(contact => contact.name === name);
@@ -64,12 +66,19 @@ export class App extends Component {
 
   render() {
     return (
-      <>
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: '1fr',
+          gridGap: '16px',
+          paddingBottom: '24px',
+        }}
+      >
         <Toaster position="top-right" />
-        <Searchbar onSearch={this.formSubmitHandler} />
+        <Searchbar onSubmit={this.formSubmitHandler} />
         <ImageGallery value={this.state.searchQuery} />
         {/* <Button onClick={this.handleLoad} /> */}
-      </>
+      </div>
     );
   }
 
