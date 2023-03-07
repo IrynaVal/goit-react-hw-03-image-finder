@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import toast from 'react-hot-toast';
-import { GoSearch } from 'react-icons/go';
+import { BsSearch } from 'react-icons/bs';
 import css from './Searchbar.module.css';
 import PropTypes from 'prop-types';
 
@@ -40,8 +40,7 @@ export class Searchbar extends Component {
         <form className={css.SearchForm} onSubmit={this.handleFormSubmit}>
           <button type="submit" className={css.SearchForm_button}>
             <span className={css.SearchForm_button_label}>
-              Search
-              {/* <GoSearch /> */}
+              <BsSearch size="20" fill="#000" />
             </span>
           </button>
 

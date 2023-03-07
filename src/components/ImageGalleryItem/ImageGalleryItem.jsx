@@ -12,10 +12,6 @@ export class ImageGalleryItem extends Component {
     this.setState(({ isModalOpen }) => ({ isModalOpen: !isModalOpen }));
   };
 
-  // openModal = () => {
-  //   this.setState({ isModalOpen: true });
-  // };
-
   render() {
     const {
       item: { webformatURL, largeImageURL, tags },
@@ -24,12 +20,12 @@ export class ImageGalleryItem extends Component {
 
     return (
       <>
-        <li
-          className={(css.ImageGalleryItem, css.ImageGalleryItem_image)}
-          // className={}
-          onClick={this.toggleModal}
-        >
-          <img src={webformatURL} alt={tags} />
+        <li className={css.ImageGalleryItem} onClick={this.toggleModal}>
+          <img
+            className={css.ImageGalleryItem_image}
+            src={webformatURL}
+            alt={tags}
+          />
         </li>
         {isModalOpen && (
           <Modal onClose={this.toggleModal} image={largeImageURL} tags={tags} />

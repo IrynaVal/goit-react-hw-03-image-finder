@@ -13,7 +13,6 @@ export class ImageGallery extends Component {
     loading: false,
     page: 1,
     imgPerPage: 12,
-    // selectedImg: null,
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -23,7 +22,6 @@ export class ImageGallery extends Component {
     ) {
       this.setState({ loading: true });
       getImages(this.props.value, this.state.page, this.state.imgPerPage)
-        .then(response => response.json())
         .then(data => {
           console.log(data);
           // console.log(data.hits);
@@ -32,6 +30,7 @@ export class ImageGallery extends Component {
             return Promise.reject(new Error());
           }
           if (prevProps.value !== this.props.value) {
+            // this.setState({ images: [] });
             // this.setState({ page: 1 });
             this.setState({ images: [...data.hits] });
           } else {
@@ -41,8 +40,6 @@ export class ImageGallery extends Component {
         })
 
         .catch(error => {
-          this.setState({ error });
-          // console.log(error);
           toast.error(
             'Sorry, there are no images matching your search query. Please try again.'
           );
@@ -57,10 +54,6 @@ export class ImageGallery extends Component {
     this.setState(prevState => ({ page: prevState.page + 1 }));
   };
 
-  // selectImg = imgUrl => {
-  //   this.setState({ selectedImg: imgUrl });
-  // };
-
   render() {
     return (
       <>
@@ -70,7 +63,7 @@ export class ImageGallery extends Component {
             height="80"
             width="80"
             ariaLabel="blocks-loading"
-            wrapperStyle={{}}
+            wrapperStyle={{ marginLeft: 'auto', marginRight: 'auto' }}
             wrapperClass="blocks-wrapper"
             colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
           />
@@ -97,4 +90,6 @@ export class ImageGallery extends Component {
   }
 }
 
-ImageGallery.propTypes = {};
+ImageGallery.propTypes = {
+  value: PropTypes.string.isRequired,
+};
