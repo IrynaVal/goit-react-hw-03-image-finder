@@ -60,6 +60,7 @@ export class App extends Component {
       >
         <Toaster position="top-right" />
         <Searchbar onSubmit={this.formSubmitHandler} />
+        {this.state.images.length !== 0 && <ImageGallery images={images} />}
         {loading && (
           <ColorRing
             visible={true}
@@ -71,9 +72,9 @@ export class App extends Component {
             colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
           />
         )}
-
-        <ImageGallery images={images} />
-        {images.length !== 0 && <Button onClick={this.handleLoad} />}
+        {images.length !== 0 && !loading && (
+          <Button onClick={this.handleLoad} />
+        )}
       </div>
     );
   }
